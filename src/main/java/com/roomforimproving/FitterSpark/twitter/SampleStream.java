@@ -3,6 +3,7 @@ package com.roomforimproving.FitterSpark.twitter;
 /*
  * Created by davidsudia on 5/2/16.
  */
+
 import com.roomforimproving.FitterSpark.AppConfig;
 import com.twitter.hbc.ClientBuilder;
 import com.twitter.hbc.core.Constants;
@@ -11,12 +12,12 @@ import com.twitter.hbc.core.processor.StringDelimitedProcessor;
 import com.twitter.hbc.httpclient.BasicClient;
 import com.twitter.hbc.httpclient.auth.Authentication;
 import com.twitter.hbc.httpclient.auth.OAuth1;
+import org.eclipse.jetty.websocket.api.Session;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
+import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +27,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class SampleStream implements Runnable {
 
-    public SampleStream () {
+    private Queue<Session> sessions;
+
+    public SampleStream(Queue<Session> sessions) {
+        this.sessions = sessions;
         (new Thread(this)).start();
     }
 
@@ -53,36 +57,32 @@ public class SampleStream implements Runnable {
                 .build();
 
         client.connect();
-        try {
-            PrintWriter writer = new PrintWriter("OneThousandTweets.json", "UTF-8");
-            writer.print("[");
 
-            for (int msgRead = 0; msgRead < 10; msgRead ++) {
-                if (client.isDone()) {
-                    System.out.println("Error: " + client.getExitEvent().getMessage());
-                    break;
-                }
-
-                try {
-                    String msg = queue.poll(5, TimeUnit.SECONDS);
-                    JSONObject obj;
-                    obj = new JSONObject(msg);
-                    if (obj.has("text")) {
-                        System.out.println(msgRead);
-                        writer.println(obj.toString() + ",");
-                    }
-                } catch (JSONException ex) {
-                    System.out.println("JSON Error: " + ex);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        while (true) {
+            if (client.isDone()) {
+                System.out.println("Error: " + client.getExitEvent().getMessage());
+                break;
             }
 
-            writer.println("]");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            try {
+                String msg = queue.poll(5, TimeUnit.SECONDS);
+                JSONObject obj;
+                obj = new JSONObject(msg);
+                System.out.println(obj);
+                if (obj.has("text")) {
+                    for (Session session : sessions) {
+                        try {
+                            session.getRemote().sendString(obj.toString());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            } catch (JSONException ex) {
+                System.out.println("JSON Error: " + ex);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         client.stop();

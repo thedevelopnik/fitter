@@ -1,5 +1,6 @@
 package com.roomforimproving.FitterSpark.websocket;
 
+import com.roomforimproving.FitterSpark.twitter.SampleStream;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.*;
 
@@ -14,6 +15,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class EchoWebSocket {
 
     private static final Queue<Session> sessions = new ConcurrentLinkedQueue<Session>();
+
+    private static final SampleStream SAMPLE_STREAM = new SampleStream(sessions);
 
     @OnWebSocketConnect
     public void connected(Session session) {
