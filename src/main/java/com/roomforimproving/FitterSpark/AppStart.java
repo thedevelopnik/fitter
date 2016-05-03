@@ -8,20 +8,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static spark.Spark.*;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 
 /*
  * Created by davidsudia on 5/2/16.
  */
 public class AppStart {
     public static void main(String[] args) {
+        ThymeleafTemplateEngine thymeleafTemplateEngine = new ThymeleafTemplateEngine();
+
         webSocket("/subscribe", EchoWebSocket.class);
 
-        final Map indexMap = new HashMap();
-        indexMap.put("title", "index");
-        get("/", (req, res) -> new ModelAndView(indexMap, "index"), new ThymeleafTemplateEngine());
+        get("/", (req, res) -> {
+            final Map indexMap = new HashMap();
+            indexMap.put("title", "index");
+            ModelAndView modelAndView = new ModelAndView(indexMap, "index");
+            res.status(200);
+            return thymeleafTemplateEngine.render(modelAndView);
+        });
 
-        final Map loginMap = new HashMap();
-        loginMap.put("title", "login");
-        get("/login", (req, res) -> new ModelAndView(loginMap, "login"), new ThymeleafTemplateEngine());
+        get("/login", (req, res) -> {
+            final Map indexMap = new HashMap();
+            indexMap.put("title", "login");
+            ModelAndView modelAndView = new ModelAndView(indexMap, "login");
+            res.status(200);
+            return thymeleafTemplateEngine.render(modelAndView);
+        });
     }
 }
