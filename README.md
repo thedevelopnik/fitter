@@ -1,7 +1,7 @@
 # Fitter - Twitter Filtering API in Java
-Created by [David Sudia](https://github.com/dsudia), [Ben Hernandez](https://github.com/benaychh) and [Kyle Maxwell](https://github.com/KyleJayMaxwell).
+Created and pair programmed by [David Sudia](https://github.com/dsudia) and [Ben Hernandez](https://github.com/benaychh).
 
-New home repo for this project as it is rebuilt using Play.
+New home repo for this project as it is rebuilt using Spark.
 
 See http://githbub.com/dsudia/java-twitter-api for current build in Spring.
 
