@@ -47,4 +47,38 @@ public class AppStartTest {
         }
     }
 
+    @Test
+    public void testSignup() throws Exception {
+        String strUrl = "http://localhost:4567/signup";
+
+        try {
+            URL url = new URL(strUrl);
+            HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
+            urlConn.connect();
+
+            assertEquals(HttpURLConnection.HTTP_OK, urlConn.getResponseCode());
+        } catch (IOException e) {
+            System.err.println("Error creating HTTP connection");
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Test
+    public void testDocs() throws Exception {
+        String strUrl = "http://localhost:4567/docs";
+
+        try {
+            URL url = new URL(strUrl);
+            HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
+            urlConn.connect();
+
+            assertEquals(HttpURLConnection.HTTP_OK, urlConn.getResponseCode());
+        } catch (IOException e) {
+            System.err.println("Error creating HTTP connection");
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
 }
