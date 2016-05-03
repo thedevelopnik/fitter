@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Fitter Portal</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/superhero/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-88w0u/oucDSTE30ETLLIobzhT+bQ6CSsiqQyLZpwHvve89eqUA9F2Db6ST6jGRLx" crossorigin="anonymous"/>
+    <link th:href="@{/app.css}" rel="stylesheet"/>
+    <meta http-equiv="Content-Type" content="text/html; charset-UTF-8"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{/}">Fitter</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/login}">Login</a></li>
+                <li><a th:href="@{/signup}">Sign Up</a></li>
+                <li>
+                    <form class="form-inline" th:action="@{/logout}" method="post"><input
+                            class="btn btn-sm btn-warning offset" type="submit" value="Logout"/></form>
+                </li>
+                <li><a th:href="@{/myaccount}">My Account</a></li>
+                <li><a th:href="@{/docs}">Docs</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="col-md-6 col-offset-2">
+    <h1>Welcome to Fitter's Dev Portal</h1>
+    <p>Here you can sign up for an API key and read the docs for using the Fitter API</p>
+</div>
+
+
+</body>
+</html>

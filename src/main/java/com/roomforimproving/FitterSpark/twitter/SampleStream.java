@@ -68,7 +68,6 @@ public class SampleStream implements Runnable {
                 String msg = queue.poll(5, TimeUnit.SECONDS);
                 JSONObject obj;
                 obj = new JSONObject(msg);
-                System.out.println(obj);
                 if (obj.has("text")) {
                     for (Session session : sessions) {
                         try {

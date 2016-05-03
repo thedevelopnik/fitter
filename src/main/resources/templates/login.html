@@ -1,0 +1,62 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login to Fitter</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/superhero/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-88w0u/oucDSTE30ETLLIobzhT+bQ6CSsiqQyLZpwHvve89eqUA9F2Db6ST6jGRLx" crossorigin="anonymous"/>
+    <link th:href="@{/css/app.css}" rel="stylesheet"/>
+    <meta http-equiv="Content-Type" content="text/html; charset-UTF-8"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{/}">Fitter</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/login}">Login</a></li>
+                <li><a th:href="@{/signup}">Sign Up</a></li>
+                <li>
+                    <form class="form-inline" th:action="@{/logout}" method="post"><input
+                            class="btn btn-sm btn-warning offset" type="submit" value="Logout"/></form>
+                </li>
+                <li><a th:href="@{/myaccount}">My Account</a></li>
+                <li><a th:href="@{/docs}">Docs</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="col-md-4"></div>
+<div class="col-md-4">
+    <div th:if="${param.error}">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
+    <div th:if="${param.success}">
+        You are registered! Please login.
+    </div>
+    <form class="form-signin" th:action="@{/j_spring_security_check}" method="post">
+        <h2 class="form-signin-heading">Login</h2>
+        <label for="j_username" class="sr-only">Username</label>
+        <input type="text" id="j_username" class="form-control" name="j_username" placeholder="username"
+               required="true"
+               autofocus="true"/>
+        <label for="j_password" class="sr-only">Password</label>
+        <input type="password" id="j_password" class="form-control" name="j_password" placeholder="password123"
+               required="true"/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    </form>
+</div>
+<div class="col-md-4"></div>
+
+</body>
+</html>

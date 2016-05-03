@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login to Fitter</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/superhero/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-88w0u/oucDSTE30ETLLIobzhT+bQ6CSsiqQyLZpwHvve89eqUA9F2Db6ST6jGRLx" crossorigin="anonymous"/>
+    <link th:href="@{/css/app.css}" rel="stylesheet"/>
+    <meta http-equiv="Content-Type" content="text/html; charset-UTF-8"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{/}">Fitter</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/login}">Login</a></li>
+                <li><a th:href="@{/signup}">Sign Up</a></li>
+                <li>
+                    <form class="form-inline" th:action="@{/logout}" method="post"><input
+                            class="btn btn-sm btn-warning offset" type="submit" value="Logout"/></form>
+                </li>
+                <li><a th:href="@{/myaccount}">My Account</a></li>
+                <li><a th:href="@{/docs}">Docs</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="col-md-4"></div>
+<div class="col-md-4">
+    <form class="form-signin" method="post" modelAttribute="user" th:action="@{/signup}">
+        <h2 class="form-signin-heading">Register</h2>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="username" required="true"
+               autofocus="true"/>
+
+        <label for="firstname" class="sr-only">First Name</label>
+        <input type="text" id="firstname" name="firstname" class="form-control" placeholder="First Name"
+               required="true"/>
+
+        <label for="lastname" class="sr-only">First Name</label>
+        <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Last Name" required="true"/>
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="password123"
+               required="true"/>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    </form>
+</div>
+<div class="col-md-4"></div>
+
+</body>
+</html>

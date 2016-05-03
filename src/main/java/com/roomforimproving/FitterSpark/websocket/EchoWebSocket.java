@@ -19,13 +19,15 @@ public class EchoWebSocket {
     private static final SampleStream SAMPLE_STREAM = new SampleStream(sessions);
 
     @OnWebSocketConnect
-    public void connected(Session session) {
+    public void connected(Session session) throws IOException {
         sessions.add(session);
+        session.getRemote().sendString("You're connected!");
     }
 
     @OnWebSocketClose
     public void closed(Session session, int statusCode, String reason) {
         sessions.remove(session);
+        System.out.println("Connection closed");
     }
 
     @OnWebSocketMessage

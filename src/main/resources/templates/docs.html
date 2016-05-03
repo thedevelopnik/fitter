@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Fitter Portal</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/superhero/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-88w0u/oucDSTE30ETLLIobzhT+bQ6CSsiqQyLZpwHvve89eqUA9F2Db6ST6jGRLx" crossorigin="anonymous"/>
+    <link th:href="@{/app.css}" rel="stylesheet"/>
+    <meta http-equiv="Content-Type" content="text/html; charset-UTF-8"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{/}">Fitter</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/login}">Login</a></li>
+                <li><a th:href="@{/signup}">Sign Up</a></li>
+                <li>
+                    <form class="form-inline" th:action="@{/logout}" method="post"><input
+                            class="btn btn-sm btn-warning offset" type="submit" value="Logout"/></form>
+                </li>
+                <li><a th:href="@{/myaccount}">My Account</a></li>
+                <li><a th:href="@{/docs}">Docs</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="col-md-6 col-offset-2">
+    <h1>Fitter Docs</h1>
+
+    <h2>What is Fitter?</h2>
+    <p>Fitter is a Tweet filtering service that can provide several analyses of Tweets.</p>
+    <p>When you make a request to Fitter, you can search tweets by keyword, and get back Kincaid Readability Scores and
+        Sentiment Analysis of the tweets.</p>
+
+    <h2>Acquiring an API Key</h2>
+    <p>To get an API key, register by clicking Sign Up on the navbar above. When you register, an API key is
+        automatically generated for you.</p>
+    <p>To see your API key, please login using the username and password you chose when registering</p>
+    <p>NOTE: Login is not currently working, please email dsudia@gmail.com with your username to receive your API
+        key.</p>
+
+    <h2>Sending Requests</h2>
+    <p>Clients connect to Fitter through a websocket. When clients connect, they must send through a JSON object with
+        the following keys:</p>
+    <ol>
+        <li>apiKey: your key, in string form</li>
+        <li>keywords: any keywords you want to filter tweets by (in text body), in array form</li>
+        <li>semantic: a boolean indicating whether or not you want sentiment scores returned</li>
+        <li>readability: a boolean indicating whether or not you want readability scores returned</li>
+    </ol>
+    <p>Socket connection requests should be made to "/tweets". The subscription url is "/tweets/{yourapikey}".</p>
+
+    <h2>Processing Data</h2>
+    <p>Fitter returns a JSON object that includes the following data:</p>
+    <ol>
+        <li>Tweet id</li>
+        <li>Tweet text</li>
+        <li>Tweet author</li>
+        <li>Author's profile image url</li>
+        <li>Type of attached media (if any)</li>
+        <li>Attached media url (if any)</li>
+        <li>Sentiment score of text (if requested)</li>
+        <li>Readability score (if requested)</li>
+    </ol>
+    <p>Sentiment analysis scores are valued as follows:</p>
+    <ul>
+        <li>0: Very Negative</li>
+        <li>1: Negative</li>
+        <li>2: Neutral</li>
+        <li>3: Positive</li>
+        <li>4: Very Positive</li>
+    </ul>
+</div>
+</body>
+</html>
