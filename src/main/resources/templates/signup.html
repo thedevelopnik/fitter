@@ -33,8 +33,8 @@
 <div class="col-md-4">
     <form class="form-signin" method="post" modelAttribute="user" action="/signup">
         <h2 class="form-signin-heading">Sign Up</h2>
-        <label for="username" class="sr-only">Username</label>
-        <input type="text" id="username" name="username" class="form-control" placeholder="username" required="true"
+        <label for="email" class="sr-only">Email</label>
+        <input type="email" id="email" name="username" class="form-control" placeholder="jane@gmail.com" required="true"
                autofocus="true"/>
 
         <label for="firstname" class="sr-only">First Name</label>
@@ -46,6 +46,10 @@
 
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="password123"
+               required="true"/>
+
+        <label for="confirmPassword" class="sr-only">Password</label>
+        <input type="password" id="confirmPassword" name="confirmpassword" class="form-control" placeholder="password123"
                required="true"/>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
