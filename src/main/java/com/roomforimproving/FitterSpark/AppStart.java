@@ -1,22 +1,25 @@
 package com.roomforimproving.FitterSpark;
 
+import com.roomforimproving.FitterSpark.database.User;
+import com.roomforimproving.FitterSpark.database.Users;
 import com.roomforimproving.FitterSpark.websocket.EchoWebSocket;
+import org.mindrot.jbcrypt.BCrypt;
 import spark.ModelAndView;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
 import static spark.Spark.*;
-import spark.Request;
-import spark.Response;
-import spark.Route;
 
 /*
  * Created by davidsudia on 5/2/16.
  */
 public class AppStart {
     public static void main(String[] args) {
+        Users users = new Users();
+
         ThymeleafTemplateEngine thymeleafTemplateEngine = new ThymeleafTemplateEngine();
 
         webSocket("/subscribe", EchoWebSocket.class);
@@ -51,6 +54,38 @@ public class AppStart {
             ModelAndView modelAndView = new ModelAndView(indexMap, "signup");
             res.status(200);
             return thymeleafTemplateEngine.render(modelAndView);
+        });
+
+        post("/signup", (req, res) -> {
+
+            // parse req.body for form values and save values in memory
+            String[] userDataArray = req.body().split("&");
+
+            String[] emailPair = userDataArray[0].split("=");
+            String[] fnamePair = userDataArray[1].split("=");
+            String[] lnamePair = userDataArray[2].split("=");
+            String[] passwordPair = userDataArray[3].split("=");
+            String[] cpassPair = userDataArray[4].split("=");
+
+            String email = URLDecoder.decode(emailPair[1], "UTF-8");
+            String firstname  = URLDecoder.decode(fnamePair[1], "UTF-8");
+            String lastname = URLDecoder.decode(lnamePair[1], "UTF-8");
+            String password = URLDecoder.decode(passwordPair[1], "UTF-8");
+            String confirmpassword = URLDecoder.decode(cpassPair[1], "UTF-8");
+
+            if (password.equals(confirmpassword)) {
+                User newUser = new User(null, email, firstname, lastname, password, null);
+                users.insertUser(newUser);
+                res.redirect("/login");
+                return "submitted";
+            } else {
+                res.redirect("/signup?error=true");
+                return "passwords must match";
+            }
+        });
+
+        post("/login", (req, res) -> {
+
         });
     }
 }
