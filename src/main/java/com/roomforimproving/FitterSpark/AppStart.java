@@ -67,6 +67,15 @@ public class AppStart {
             return thymeleafTemplateEngine.render(modelAndView);
         });
 
+        get("/logout", (req, res) -> {
+            req.session().removeAttribute("user");
+            req.session().removeAttribute("fname");
+            req.session().removeAttribute("lname");
+            req.session().removeAttribute("apiKey");
+            res.redirect("/login");
+            return "Logged out!";
+        });
+
         post("/signup", (req, res) -> {
 
             // parse req.body for form values and save values in memory
