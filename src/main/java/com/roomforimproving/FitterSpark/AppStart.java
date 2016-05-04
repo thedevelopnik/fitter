@@ -96,7 +96,11 @@ public class AppStart {
             String hashedPass = foundUser.getPassword();
 
             if (BCrypt.checkpw(password, hashedPass)) {
-                res.redirect("/docs");
+                req.session().attribute("user", "email");
+                req.session().attribute("fname", foundUser.getFirstname());
+                req.session().attribute("lname", foundUser.getLastname());
+                req.session().attribute("apiKey", foundUser.getApiKey());
+                res.redirect("/myaccount");
                 System.out.println("Success!");
                 return "Success!";
             } else {
