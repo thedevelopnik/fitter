@@ -56,6 +56,17 @@ public class AppStart {
             return thymeleafTemplateEngine.render(modelAndView);
         });
 
+        get("/myaccount", (req, res) -> {
+           final Map accountMap = new HashMap();
+            accountMap.put("email", req.session().attribute("user"));
+            accountMap.put("firstname", req.session().attribute("fname"));
+            accountMap.put("lastname", req.session().attribute("lname"));
+            accountMap.put("apiKey", req.session().attribute("apiKey"));
+            ModelAndView modelAndView = new ModelAndView(accountMap, "account");
+            res.status(200);
+            return thymeleafTemplateEngine.render(modelAndView);
+        });
+
         post("/signup", (req, res) -> {
 
             // parse req.body for form values and save values in memory
@@ -96,7 +107,7 @@ public class AppStart {
             String hashedPass = foundUser.getPassword();
 
             if (BCrypt.checkpw(password, hashedPass)) {
-                req.session().attribute("user", "email");
+                req.session().attribute("user", foundUser.getEmail());
                 req.session().attribute("fname", foundUser.getFirstname());
                 req.session().attribute("lname", foundUser.getLastname());
                 req.session().attribute("apiKey", foundUser.getApiKey());
