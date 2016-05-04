@@ -85,7 +85,25 @@ public class AppStart {
         });
 
         post("/login", (req, res) -> {
+            String[] userDataArray = req.body().split("&");
+            String[] emailPair = userDataArray[0].split("=");
+            String[] passwordPair = userDataArray[1].split("=");
+            String email = URLDecoder.decode(emailPair[1], "UTF-8");
+            String password = URLDecoder.decode(passwordPair[1], "UTF-8");
 
+            User foundUser = users.findUser(email);
+
+            String hashedPass = foundUser.getPassword();
+
+            if (BCrypt.checkpw(password, hashedPass)) {
+                res.redirect("/docs");
+                System.out.println("Success!");
+                return "Success!";
+            } else {
+                res.redirect("/login?error=true");
+                System.out.println("Login credentials are incorrect.");
+                return "Login credentials are incorrect.";
+            }
         });
     }
 }
