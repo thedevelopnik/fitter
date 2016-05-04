@@ -46,6 +46,16 @@
             <artifactId>mongo-java-driver</artifactId>
             <version>3.2.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>bson</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.3m</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -1,21 +1,27 @@
 package com.roomforimproving.FitterSpark.database;
 
-/**
+/*
  * Created by davidsudia on 5/4/16.
  */
 public class User {
+    private String id;
     private String email;
     private String firstname;
     private String lastname;
     private String password;
     private String apiKey;
 
-    public User(String email, String firstname, String lastname, String password, String apiKey) {
+    public User(String id, String email, String firstname, String lastname, String password, String apiKey) {
+        this.id = id;
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
         this.password = password;
         this.apiKey = apiKey;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getEmail() {
