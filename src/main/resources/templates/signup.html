@@ -31,8 +31,8 @@
 </nav>
 <div class="col-md-4"></div>
 <div class="col-md-4">
-    <form class="form-signin" method="post" modelAttribute="user" th:action="@{/signup}">
-        <h2 class="form-signin-heading">Register</h2>
+    <form class="form-signin" method="post" modelAttribute="user" action="/signup">
+        <h2 class="form-signin-heading">Sign Up</h2>
         <label for="username" class="sr-only">Username</label>
         <input type="text" id="username" name="username" class="form-control" placeholder="username" required="true"
                autofocus="true"/>
@@ -48,7 +48,7 @@
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="password123"
                required="true"/>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form>
 </div>
 <div class="col-md-4"></div>

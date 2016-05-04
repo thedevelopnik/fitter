@@ -36,5 +36,21 @@ public class AppStart {
             res.status(200);
             return thymeleafTemplateEngine.render(modelAndView);
         });
+
+        get("/docs", (req, res) -> {
+            final Map indexMap = new HashMap();
+            indexMap.put("title", "docs");
+            ModelAndView modelAndView = new ModelAndView(indexMap, "docs");
+            res.status(200);
+            return thymeleafTemplateEngine.render(modelAndView);
+        });
+
+        get("/signup", (req, res) -> {
+            final Map indexMap = new HashMap();
+            indexMap.put("title", "signup");
+            ModelAndView modelAndView = new ModelAndView(indexMap, "signup");
+            res.status(200);
+            return thymeleafTemplateEngine.render(modelAndView);
+        });
     }
 }
