@@ -1,5 +1,6 @@
 package com.roomforimproving.FitterSpark.websocket;
 
+import com.roomforimproving.FitterSpark.twitter.MinTweet;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -46,8 +47,9 @@ public class Filters {
         this.kincaid = kincaid;
     }
 
-    public Boolean match(JSONObject tweet) {
-        // grab data from tweet
+    public Boolean match(MinTweet minTweet) {
 
+
+        return true;
     }
 }

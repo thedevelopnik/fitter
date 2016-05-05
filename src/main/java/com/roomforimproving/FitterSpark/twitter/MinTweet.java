@@ -47,7 +47,6 @@ public class MinTweet {
 
     public String getText() {
         return text;
-
     }
 
     public String getLang() {
@@ -92,5 +91,15 @@ public class MinTweet {
 
     public void setGrade(float grade) {
         this.grade = grade;
+    }
+
+    public String toString() {
+        return "\"id\":\"" + this.id
+                + "\",\"text\":\"" + this.text
+                + "\",\"user\":\"" + this.user
+                + "\",\"profileImageUrl\":\"" + this.profileImageUrl
+                + "\",\"mediaUrl\":\"" + this.mediaUrl
+                + "\",\"grade\":\"" + this.grade + "\"";
+
     }
 }

@@ -35,8 +35,11 @@ public class EchoWebSocket {
 
     @OnWebSocketMessage
     public void message(Session session, String message) throws IOException {
-        FILTERER.addOrReplaceFilter(session, new Filters(message));
         System.out.println("Got: " + message);
-        session.getRemote().sendString(message);
+        if (FILTERER.addOrReplaceFilter(session, new Filters(message))) {
+            session.getRemote().sendString("Your filter was added, tweets incoming!");
+        } else {
+            session.getRemote().sendString("Invalid API Key. Try again!");
+        }
     }
 }

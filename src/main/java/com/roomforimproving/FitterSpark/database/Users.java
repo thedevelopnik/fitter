@@ -14,10 +14,10 @@ import java.util.UUID;
  */
 public class Users {
     // create new mongoClient
-    public MongoClient mongoClient = new MongoClient();
+    public static MongoClient mongoClient = new MongoClient();
 
     // create access to database
-    public MongoDatabase db = mongoClient.getDatabase("fitter");
+    public static MongoDatabase db = mongoClient.getDatabase("fitter");
 
     // adds one user to the db
     public void insertUser(User newUser) {
@@ -70,6 +70,26 @@ public class Users {
 
         User foundUser = new User(null, userEmail, userFirstName, userLastName, hashedPass, userApiKey);
         return foundUser;
+    }
+
+    // finds a user in db by email and returns details
+    public static Boolean findValidApiKey(String apiKey) {
+        // retrieve iterable of documents
+        FindIterable<Document> iterable = db.getCollection("users").find(
+                new Document("apiKey", apiKey));
+
+        // establish memory pointer for desired document
+        final Document[] user = new Document[1];
+
+        // set document at memory pointer
+        iterable.forEach(new Block<Document>() {
+            @Override
+            public void apply(final Document document) {
+                user[0] = document;
+            }
+        });
+
+        return (user[0] != null);
     }
 
 
