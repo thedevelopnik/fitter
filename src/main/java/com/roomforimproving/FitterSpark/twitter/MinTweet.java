@@ -93,12 +93,14 @@ public class MinTweet {
     }
 
     public String toString() {
-        return "\"id\":\"" + this.id
-                + "\",\"text\":\"" + this.text
-                + "\",\"user\":\"" + this.user
-                + "\",\"profileImageUrl\":\"" + this.profileImageUrl
-                + "\",\"mediaUrl\":\"" + this.mediaUrl
-                + "\",\"grade\":\"" + this.grade + "\"";
+        JSONObject jsonTweet = new JSONObject();
+        jsonTweet.put("id", this.id);
+        jsonTweet.put("text", this.text);
+        jsonTweet.put("user", this.user);
+        jsonTweet.put("profileImageUrl", this.profileImageUrl);
+        jsonTweet.put("mediaUrl", this.mediaUrl);
+        jsonTweet.put("grade", this.grade);
 
+        return "{\"tweet\":" + jsonTweet.toString() + "}";
     }
 }

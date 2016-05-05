@@ -46,15 +46,14 @@
         key.</p>
 
     <h2>Sending Requests</h2>
-    <p>Clients connect to Fitter through a websocket. When clients connect, they must send through a JSON object with
-        the following keys:</p>
+    <p>Clients connect to Fitter through a websocket. Once you connect, you start the feed by sending a message that is a JSON object.</p>
     <ol>
         <li>apiKey: your key, in string form</li>
-        <li>keywords: any keywords you want to filter tweets by (in text body), in array form</li>
-        <li>semantic: a boolean indicating whether or not you want sentiment scores returned</li>
-        <li>readability: a boolean indicating whether or not you want readability scores returned</li>
+        <li>keywords: any keywords you want to filter tweets by (in text body), in a comma-separated list</li>
+        <!--<li>semantic: a boolean indicating whether or not you want sentiment scores returned</li>-->
+        <li>kincaid: an integer. Tweets with scores equal to and above this integer will be returned. If you want all tweets, enter 0.</li>
     </ol>
-    <p>Socket connection requests should be made to "/tweets". The subscription url is "/tweets/{yourapikey}".</p>
+    <p>Socket connection requests should be made to "/subscribe".</p>
 
     <h2>Processing Data</h2>
     <p>Fitter returns a JSON object that includes the following data:</p>
@@ -65,17 +64,16 @@
         <li>Author's profile image url</li>
         <li>Type of attached media (if any)</li>
         <li>Attached media url (if any)</li>
-        <li>Sentiment score of text (if requested)</li>
-        <li>Readability score (if requested)</li>
+        <li>Kincaid Readability score</li>
     </ol>
-    <p>Sentiment analysis scores are valued as follows:</p>
-    <ul>
-        <li>0: Very Negative</li>
-        <li>1: Negative</li>
-        <li>2: Neutral</li>
-        <li>3: Positive</li>
-        <li>4: Very Positive</li>
-    </ul>
+    <!--<p>Sentiment analysis scores are valued as follows:</p>-->
+    <!--<ul>-->
+        <!--<li>0: Very Negative</li>-->
+        <!--<li>1: Negative</li>-->
+        <!--<li>2: Neutral</li>-->
+        <!--<li>3: Positive</li>-->
+        <!--<li>4: Very Positive</li>-->
+    <!--</ul>-->
 </div>
 </body>
 </html>

@@ -48,16 +48,19 @@ public class Filters {
     }
 
     public Boolean match(MinTweet minTweet) {
-        // only send Tweet if Kincaid >=
-        if (minTweet.getGrade() >= this.getKincaid()) {
-            if(!keywords.isEmpty()) {
-                for(String word : this.keywords) {
-                    if (minTweet.getText().contains(word)) {
-                        return true;
+        // only send Tweet if in English
+        if (minTweet.getLang().equals("en")) {
+            // only send Tweet if Kincaid >=
+            if (minTweet.getGrade() >= this.getKincaid()) {
+                if(!keywords.isEmpty()) {
+                    for(String word : this.keywords) {
+                        if (minTweet.getText().contains(word)) {
+                            return true;
+                        }
                     }
+                } else {
+                    return true;
                 }
-            } else {
-                return true;
             }
         }
         return false;

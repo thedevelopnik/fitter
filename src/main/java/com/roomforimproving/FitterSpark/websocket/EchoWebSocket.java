@@ -22,7 +22,7 @@ public class EchoWebSocket {
     @OnWebSocketConnect
     public void connected(Session session) throws IOException {
         sessions.add(session);
-        session.getRemote().sendString("You're connected!");
+        session.getRemote().sendString("{\"message\":\"You're connected!\"}");
     }
 
     @OnWebSocketClose
@@ -35,9 +35,9 @@ public class EchoWebSocket {
     public void message(Session session, String message) throws IOException {
         System.out.println("Got: " + message);
         if (Filterer.addOrReplaceFilter(session, new Filters(message))) {
-            session.getRemote().sendString("Your filter was added, tweets incoming!");
+            session.getRemote().sendString("{\"message\":\"Your filter was added! Tweets incoming!\"}");
         } else {
-            session.getRemote().sendString("Invalid API Key. Try again!");
+            session.getRemote().sendString("{\"message\":\"Invalid API key, try again!\"}");
         }
     }
 }

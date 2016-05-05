@@ -32,10 +32,12 @@ public class Filterer {
 //         for each session in filterMap
         filterMap.keySet().forEach(session -> {
            if (filterMap.get(session).match(minTweet)) {
-               try {
-                   session.getRemote().sendString(minTweet.toString());
-               } catch (IOException e) {
-                   e.printStackTrace();
+               if (session.isOpen()) {
+                   try {
+                       session.getRemote().sendString(minTweet.toString());
+                   } catch (IOException e) {
+                       e.printStackTrace();
+                   }
                }
            }
         });
