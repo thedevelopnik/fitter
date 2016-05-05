@@ -19,7 +19,7 @@ public class Filters {
         JSONObject jsonMessage = new JSONObject(filterObject);
         this.apiKey = jsonMessage.getString("apiKey");
         String temp = jsonMessage.getString("keywords");
-        this.keywords = Arrays.asList(temp.split(","));
+        this.keywords = Arrays.asList(temp.trim().split(","));
         this.kincaid = jsonMessage.getInt("kincaid");
     }
 
@@ -54,7 +54,7 @@ public class Filters {
             if (minTweet.getGrade() >= this.getKincaid()) {
                 if(!keywords.isEmpty()) {
                     for(String word : this.keywords) {
-                        if (minTweet.getText().contains(word)) {
+                        if (minTweet.getText().toLowerCase().contains(word.toLowerCase())) {
                             return true;
                         }
                     }

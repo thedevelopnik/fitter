@@ -29,7 +29,7 @@ public class Filterer {
     public static void removeFilter(Session session) { filterMap.remove(session); }
 
     public static void processTweet (MinTweet minTweet) {
-//         for each session in filterMap
+        // for each session in filterMap
         filterMap.keySet().forEach(session -> {
            if (filterMap.get(session).match(minTweet)) {
                if (session.isOpen()) {
