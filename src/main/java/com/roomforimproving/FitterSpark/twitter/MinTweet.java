@@ -16,11 +16,13 @@ public class MinTweet {
     private String mediaUrl;
     private float grade;
 
+
     public MinTweet(JSONObject tweet) {
 
         // grab data from tweet
         this.id = (String) tweet.get("id");
         this.text = (String) tweet.get("text");
+        this.grade = io.benaychh.java_fathom.Kincaid.analyze(this.text);
         JSONObject user = (JSONObject) tweet.get("user");
         this.user = (String) user.get("screen_name");
         this.profileImageUrl = (String) user.get("profile_image_url_https");
@@ -46,6 +48,14 @@ public class MinTweet {
     public String getText() {
         return text;
 
+    }
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
     }
 
     public void setText(String text) {
