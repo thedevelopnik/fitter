@@ -5,6 +5,7 @@ package com.roomforimproving.FitterSpark.twitter;
  */
 
 import com.roomforimproving.FitterSpark.AppConfig;
+import com.roomforimproving.FitterSpark.websocket.Filterer;
 import com.twitter.hbc.ClientBuilder;
 import com.twitter.hbc.core.Constants;
 import com.twitter.hbc.core.endpoint.StatusesSampleEndpoint;
@@ -13,10 +14,8 @@ import com.twitter.hbc.httpclient.BasicClient;
 import com.twitter.hbc.httpclient.auth.Authentication;
 import com.twitter.hbc.httpclient.auth.OAuth1;
 import org.eclipse.jetty.websocket.api.Session;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -66,27 +65,27 @@ public class SampleStream implements Runnable {
 
             try {
                 String msg = queue.poll(5, TimeUnit.SECONDS);
-                JSONObject obj;
-                obj = new JSONObject(msg);
-                if (obj.has("text")) {
-                    for (Session session : sessions) {
-                        try {
-                            session.getRemote().sendString(obj.toString());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            } catch (JSONException ex) {
-                System.out.println("JSON Error: " + ex);
+                JSONObject tweet;
+                tweet = new JSONObject(msg);
+                System.out.println(tweet);
+
+
+//                if (obj.has("text")) {
+//                    for (Session session : sessions) {
+//                        try {
+//                            session.getRemote().sendString(obj.toString());
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
-        client.stop();
+            client.stop();
 
-        System.out.printf("The client read %d messages!\n", client.getStatsTracker().getNumMessages());
+            System.out.printf("The client read %d messages!\n", client.getStatsTracker().getNumMessages());
     }
 }
 

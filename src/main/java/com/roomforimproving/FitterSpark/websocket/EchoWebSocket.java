@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+
 /*
  * Created by davidsudia on 5/2/16.
  */
@@ -17,6 +18,8 @@ public class EchoWebSocket {
     private static final Queue<Session> sessions = new ConcurrentLinkedQueue<Session>();
 
     private static final SampleStream SAMPLE_STREAM = new SampleStream(sessions);
+
+    private static final Filterer FILTERER = new Filterer();
 
     @OnWebSocketConnect
     public void connected(Session session) throws IOException {
@@ -32,6 +35,7 @@ public class EchoWebSocket {
 
     @OnWebSocketMessage
     public void message(Session session, String message) throws IOException {
+        FILTERER.addOrReplaceFilter(session, new Filters(message));
         System.out.println("Got: " + message);
         session.getRemote().sendString(message);
     }
