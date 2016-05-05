@@ -14,7 +14,7 @@ public class MinTweet {
     private String profileImageUrl;
     private String lang;
     private String mediaUrl;
-    private float grade;
+    private Integer grade;
 
 
     public MinTweet(JSONObject tweet) {
@@ -89,7 +89,7 @@ public class MinTweet {
         return grade;
     }
 
-    public void setGrade(float grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 

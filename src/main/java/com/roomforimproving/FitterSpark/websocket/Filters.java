@@ -13,14 +13,14 @@ import java.util.List;
 public class Filters {
     private String apiKey;
     private List<String> keywords;
-    private Boolean kincaid;
+    private Integer kincaid;
 
     public Filters(String filterObject) {
         JSONObject jsonMessage = new JSONObject(filterObject);
         this.apiKey = jsonMessage.getString("apiKey");
         String temp = jsonMessage.getString("keywords");
         this.keywords = Arrays.asList(temp.split(","));
-        this.kincaid = jsonMessage.getBoolean("kincaid");
+        this.kincaid = jsonMessage.getInt("kincaid");
     }
 
     public String getApiKey() {
@@ -39,17 +39,27 @@ public class Filters {
         this.keywords = keywords;
     }
 
-    public Boolean getKincaid() {
+    public Integer getKincaid() {
         return kincaid;
     }
 
-    public void setKincaid(Boolean kincaid) {
+    public void setKincaid(Integer kincaid) {
         this.kincaid = kincaid;
     }
 
     public Boolean match(MinTweet minTweet) {
-
-
-        return true;
+        // only send Tweet if Kincaid >=
+        if (minTweet.getGrade() >= this.getKincaid()) {
+            if(!keywords.isEmpty()) {
+                for(String word : this.keywords) {
+                    if (minTweet.getText().contains(word)) {
+                        return true;
+                    }
+                }
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 }
