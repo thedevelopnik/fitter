@@ -3,6 +3,7 @@ package com.roomforimproving.FitterSpark;
 import com.roomforimproving.FitterSpark.database.User;
 import com.roomforimproving.FitterSpark.database.Users;
 import com.roomforimproving.FitterSpark.websocket.EchoWebSocket;
+import com.roomforimproving.FitterSpark.websocket.Filterer;
 import org.mindrot.jbcrypt.BCrypt;
 import spark.ModelAndView;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
@@ -18,6 +19,8 @@ import static spark.Spark.*;
  */
 public class AppStart {
     public static void main(String[] args) {
+        Filterer.init();
+
         Users users = new Users();
 
         ThymeleafTemplateEngine thymeleafTemplateEngine = new ThymeleafTemplateEngine();

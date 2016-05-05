@@ -67,18 +67,10 @@ public class SampleStream implements Runnable {
                 String msg = queue.poll(5, TimeUnit.SECONDS);
                 JSONObject tweet;
                 tweet = new JSONObject(msg);
-                MinTweet minTweet = new MinTweet(tweet);
-                System.out.println(tweet);
-
-
-//                if (obj.has("text")) {
-//                    for (Session session : sessions) {
-//                        try {
-//                            session.getRemote().sendString(obj.toString());
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
+                if (!tweet.has("delete")) {
+                    MinTweet minTweet = new MinTweet(tweet);
+                    Filterer.processTweet(minTweet);
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

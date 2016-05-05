@@ -19,8 +19,6 @@ public class EchoWebSocket {
 
     private static final SampleStream SAMPLE_STREAM = new SampleStream(sessions);
 
-    private static final Filterer FILTERER = new Filterer();
-
     @OnWebSocketConnect
     public void connected(Session session) throws IOException {
         sessions.add(session);
@@ -36,7 +34,7 @@ public class EchoWebSocket {
     @OnWebSocketMessage
     public void message(Session session, String message) throws IOException {
         System.out.println("Got: " + message);
-        if (FILTERER.addOrReplaceFilter(session, new Filters(message))) {
+        if (Filterer.addOrReplaceFilter(session, new Filters(message))) {
             session.getRemote().sendString("Your filter was added, tweets incoming!");
         } else {
             session.getRemote().sendString("Invalid API Key. Try again!");
