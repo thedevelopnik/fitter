@@ -3,6 +3,8 @@ Created and pair programmed by [David Sudia](https://github.com/dsudia) and [Ben
 
 ![Client screenshot](./fitter-screen.png)
 
+Currently not deployed as we cannot afford the AWS time to process 5 million tweets per day.
+
 New home repo for this project as it is rebuilt using Spark.
 
 See http://githbub.com/dsudia/java-twitter-api for current build in Spring.
