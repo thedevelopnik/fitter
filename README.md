@@ -1,6 +1,7 @@
 # Fitter - Twitter Filtering API in Java
 Created and pair programmed by [David Sudia](https://github.com/dsudia) and [Ben Hernandez](https://github.com/benaychh).
 
+![Portal screenshot](./fitter-portal-screen.png)
 ![Client screenshot](./fitter-screen.png)
 
 Currently not deployed as we cannot afford the AWS time to process 5 million tweets per day.
