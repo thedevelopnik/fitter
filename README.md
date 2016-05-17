@@ -8,7 +8,7 @@ Currently not deployed as we cannot afford the AWS time to process 5 million twe
 
 New home repo for this project as it is rebuilt using Spark.
 
-See http://githbub.com/dsudia/java-twitter-api for current build in Spring.
+See http://github.com/dsudia/java-twitter-api for current build in Spring.
 
 For an example of a product using this API, look at [this demo client](https://github.com/BenAychh/react-twitter-client).
 
